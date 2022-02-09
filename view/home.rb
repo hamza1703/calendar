@@ -17,7 +17,7 @@ class Home
 	def self.show_list_of_events_and_select_one line_numbers
 		count = 0;
 		for line in line_numbers do
-			puts "type #{count} to remove #{File.read("events.txt").lines[line]}"
+			puts "type #{count} to modify/delete #{File.read("events.txt").lines[line]}"
 			count +=1
 		end
 		line_num = gets #user selects the event that needs to be updated

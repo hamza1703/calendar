@@ -9,9 +9,11 @@ class HomeController
 
 	def initialize
 		@calendar = Calendar.new
-		Home.view_menu
-		input = gets.chomp
-		controls(input)
+		loop do
+			Home.view_menu
+			input = gets.chomp
+			controls(input)
+		end
 	end
 
 	
@@ -21,7 +23,7 @@ class HomeController
 			when "1" then
 				date = Home.input_date
 				details = Home.input_event_detail
-				@calendar.add_event date details
+				@calendar.add_event(date,details)
 			when "2" then
 				@calendar.remove_event
 			when "3" then

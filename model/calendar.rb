@@ -49,7 +49,6 @@ class Calendar
 		verify = File.read("events.txt").include?(date.to_s)
 		line_numbers = get_line_number("events.txt",date.to_s)
 		verify ? line_numbers.each {|line| puts File.read("events.txt").lines[line]} : puts("event does not exist")
-		[date,verify,line_numbers]
 	end
 
 	def grid_view(date)
@@ -83,6 +82,8 @@ class Calendar
 			lines[line_numbers[line_num.to_i]] = "" #removes the event details on selected line number
 			File.open('events.txt', 'w') { |f| f.write(lines.join) }
 			puts "Successfully removed"
+			load_data
+			
 		else
 			puts "Incorrect option"
 		end
@@ -94,6 +95,8 @@ class Calendar
 			lines[line_numbers[line_num.to_i]] ="#{date},#{modified_event_details}\n"  #updates the event details on selected line number
 			File.open('events.txt', 'w') { |f| f.write(lines.join) }
 			puts "Successfully updated"
+			load_data
+
 		else
 			puts "Incorrect option"
 		end
