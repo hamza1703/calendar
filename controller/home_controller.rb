@@ -19,21 +19,22 @@ class HomeController
 		
 		case input
 			when "1" then
-				@calendar.add_event
-
+				date = Home.input_date
+				details = Home.input_event_detail
+				@calendar.add_event date details
 			when "2" then
 				@calendar.remove_event
-
 			when "3" then
 		        @calendar.update_event
-
 			when "4" then
-				@calendar.view_events
-
+				date = Home.input_date
+				@calendar.view_events date
 			when "5" then
-				@calendar.grid_view
+				date = Home.input_date
+				@calendar.grid_view date
 			when "6" then
-				@calendar.month_view
+	    		date = CalendarHelper.input_date
+				@calendar.month_view date
 				
 			else puts "Please type the correct option"
 		end
