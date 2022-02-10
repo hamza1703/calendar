@@ -1,7 +1,7 @@
 require 'date'
-require_relative "../view/home.rb"
-require_relative "../model/calendar.rb"
-require_relative "../model/event.rb"
+require_relative "home.rb"
+require_relative "calendar.rb"
+require_relative "event.rb"
 
 
 class HomeController
@@ -23,11 +23,11 @@ class HomeController
 			when "1" then
 				date = Home.input_date
 				details = Home.input_event_detail
-				@calendar.add_event(date,details)
+				puts @calendar.add_event(date,details)
 			when "2" then
-				@calendar.remove_event
+				puts @calendar.remove_event
 			when "3" then
-		        @calendar.update_event
+		    puts @calendar.update_event
 			when "4" then
 				date = Home.input_date
 				@calendar.view_events date
@@ -35,7 +35,7 @@ class HomeController
 				date = Home.input_date
 				@calendar.grid_view date
 			when "6" then
-	    		date = CalendarHelper.input_date
+	    	date = CalendarHelper.input_date
 				@calendar.month_view date
 				
 			else puts "Please type the correct option"
