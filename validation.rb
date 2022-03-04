@@ -1,11 +1,10 @@
-require('date')
+require("date")
 
 module Validation
-
-  def self.date_input_validation date
+  def self.date_input_validation(date)
     return false if (date =~ %r(^\d{2}/\d{2}/\d{4})).nil? && (date =~ %r(^\d{2}/\d{4})).nil?
     Date.parse(date)
-    rescue StandardError
-      false
+  rescue StandardError
+    false
   end
 end

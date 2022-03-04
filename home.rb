@@ -1,4 +1,5 @@
 require_relative("validation")
+
 class Home
   include Validation
 
@@ -13,9 +14,8 @@ class Home
       return Date.parse(date)
     else
       puts "incorrect date"
-      false
+      exit
     end
-   
   end
 
   def self.input_event_detail
@@ -23,43 +23,43 @@ class Home
     details = gets.chomp
   end
 
-  def self.show_list_of_events_and_select_one line_numbers
-    count = 0;
-    for line in line_numbers do
-      puts "type #{count} to modify/delete #{File.read("events.txt").lines[line]}"
-      count +=1
+  def self.show_list_of_events_and_select_one(matched_event_line_numbers)
+    count = 0
+    for event_line_number in matched_event_line_numbers
+      puts "type #{count} to modify/delete #{File.read("events.txt").lines[event_line_number]}"
+      count += 1
     end
-    line_num = gets #user selects the event that needs to be updated
+    gets #user selects the event that needs to be updated or removed
   end
 
   def self.show_events(events)
-    events.each_with_index do |v, i|
-      puts '-' * 15
-      puts "Event Number #{i + 1}"
-      puts "Title:---#{v.details}"
-      puts "Date:---#{v.date}"
+    events.each_with_index do |event, index|
+      puts "-" * 15
+      puts "Event Number #{index + 1}"
+      puts "Title:---#{event.details}"
+      puts "Date:---#{event.date}"
     end
   end
 
   def self.grid_view(start_of_month_weekday, event_entries)
     days = %w[M T W T F S S]
-    days.each { |d| print format('%-9s', "#{d} ") }
-    i = 0
+    days.each { |d| print format("%-9s", "#{d} ") }
+    number_of_days = 0
     day_of_month = start_of_month_weekday
     day = 1
     counter = 7
-    while i < 30 + start_of_month_weekday
+    while number_of_days < 30 + start_of_month_weekday
       puts if (counter % 7).zero?
-      if i < day_of_month - 1
-        print ' '.ljust(9)
+      if number_of_days < day_of_month - 1
+        print " ".ljust(9)
         counter += 1
       else
-        print  "#{day}(#{event_entries[day]})".ljust(9) if event_entries[day].positive?
-        print  day.to_s.ljust(9) if event_entries[day].zero?
+        print "#{day}(#{event_entries[day]})".ljust(9) if event_entries[day].positive?
+        print day.to_s.ljust(9) if event_entries[day].zero?
         counter += 1
         day += 1
       end
-      i += 1
+      number_of_days += 1
     end
     puts
   end

@@ -21,7 +21,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  rspec
+  rspec (= 3.11.0)
 
 BUNDLED WITH
    2.3.7
